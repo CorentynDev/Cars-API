@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: Car API
+  version: 1.0.0
+  description: API pour gérer les données des voitures, marques, caractéristiques et plus encore.
+paths:
+  /api/cars:
+    get:
+      summary: Liste toutes les voitures disponibles
+      description: Récupère une liste paginée de toutes les voitures présentes dans la base de données.
+      parameters:
+        - name: limit
+          in: query
+          description: Nombre maximum de voitures à retourner (par défaut 10).
+          required: false
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          description: Numéro de la page pour la pagination (par défaut 1).
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: sort
+          in: query
+          description: Tri des résultats par un champ spécifique (price, year).
+          required: false
+          schema:
+            type: string
+            enum: [price, year, brand, model]
+        - name: filter
+          in: query
+          description: Filtrer les résultats par marque, type ou autres caractéristiques spécifiques.
+          required: false
+          schema:
+            type: object
+            properties:
+              brand:
+                type: string
+                description: Filtre par marque (Toyota, Tesla).
+              type:
+                type: array
+                items:
+                  type: string
+                  description: Filtre par type de voiture (Sedan, Electric).
+              engine:
+                type: string
+                description: Filtre par type de moteur (Hybrid, Electric).
+      responses:
+        '200':
+          description: Liste paginée de voitures retournée avec succès.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cars:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: "1"
+                        brand:
+                          type: string
+                          example: "Toyota"
+                        model:
+                          type: string
+                          example: "Camry"
+                        year:
+                          type: integer
+                          example: 2020
+                        price:
+                          type: integer
+                          example: 25000
+                        type:
+                          type: array
+                          items:
+                            type: string
+                          example: ["Sedan"]
+                        engine:
+                          type: string
+                          example: "Hybrid"
+                        fuel:
+                          type: string
+                          example: "Petrol"
+        '400':
+          description: Mauvaise requête, vérifier les paramètres passés.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Invalid parameters: 'page' must be greater than 0."
+        '500':
+          description: Erreur interne du serveur.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: "Internal server error. Please try again later."
