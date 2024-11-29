@@ -1,27 +1,21 @@
-Une entité qui regroupe toutes les informations sur les systèmes de sécurité d'une voiture.
+# Safety Feature Entity
 
+## Description
+
+The `safety feature` entity is a set of all features which could be found in a `car`, aimed at security.
+
+## JSON Structure for MongoDB Atlas
+
+```JSON
 {
-"_id": "ObjectId",
-"name": "Freinage autonome d'urgence",
-"description": "Le système détecte les piétons et les véhicules et applique les freins en cas d'urgence.",
-"standard": true,
-"optional_on_models": ["ObjectId", "ObjectId"],
-"rating": {
-"organization": "Euro NCAP",
-"score": 5
+  "_id": "ObjectId",
+  "name": "string",
+  "description": "string",
+  "standard": "boolean",
+  "optional_on_models": [
+    "ObjectId"
+  ],
+  "invented": "ISODate",
+  "inventor": "string"
 }
-}
-
-→ Liste des systèmes de sécurité, liés aux voitures.
-
-{
-"_id": "ObjectId",
-"name": "Freinage autonome d'urgence",
-"description": "Le système détecte les piétons et les véhicules et applique les freins en cas d'urgence.",
-"standard": true,
-"optional_on_models": ["ObjectId", "ObjectId"],
-"rating": {
-"organization": "Euro NCAP",
-"score": 5
-}
-}
+```

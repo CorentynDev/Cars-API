@@ -1,5 +1,12 @@
-Transactions - Historique d’achat/vente/location.
+# Transaction Entity
 
+## Description
+
+The `transaction` entity is a set of information that allows users to keep track of their purchase(s), sale(s) and rental(s).
+
+## JSON Structure for MongoDB Atlas
+
+```JSON
 {
 "_id": "ObjectId",
 "user_id": "ObjectId",
@@ -7,3 +14,4 @@ Transactions - Historique d’achat/vente/location.
 "price": "number",
 "date": "ISODate"
 }
+```

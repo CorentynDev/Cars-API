@@ -1,19 +1,21 @@
-Une entité pour lister toutes les technologies d’une voiture.
+# Technology Entity
 
+## Description
+
+The `technology` entity is a set of systems which improve a `car`.
+
+## JSON Structure for MongoDB Atlas
+
+```JSON
 {
-"_id": "ObjectId",
-"name": "Pilotage automatique",
-"description": "Système de conduite autonome de niveau 2 avec maintien dans la voie et régulateur de vitesse adaptatif.",
-"standard": false,
-"optional_on_models": ["ObjectId", "ObjectId"]
+  "_id": "ObjectId",
+  "name": "string",
+  "description": "string",
+  "standard": "boolean",
+  "optional_on_models": [
+    "ObjectId"
+  ],
+  "invented": "ISODate",
+  "inventor": "string"
 }
-
-→ Liste des technologies avancées.
-
-{
-"_id": "ObjectId",
-"name": "Pilotage automatique",
-"description": "Système de conduite autonome de niveau 2 avec maintien dans la voie et régulateur de vitesse adaptatif.",
-"standard": false,
-"optional_on_models": ["ObjectId", "ObjectId"]
-}
+```
