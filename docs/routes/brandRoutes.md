@@ -1,60 +1,64 @@
-Méthode	Route	Description	Paramètres obligatoires / optionnels
-GET	/brands	Liste toutes les marques de voitures.	region (optionnel).
-GET	/brands/:id	Récupère les détails d’une marque spécifique.	id (obligatoire).
-POST	/brands	Ajoute une nouvelle marque.	name, logo_url, history (obligatoires).
-PUT	/brands/:id	Met à jour les infos d’une marque.	Champs modifiables : history, logo_url, records.
-DELETE	/brands/:id	Supprime une marque.	id (obligatoire).
-GET	/brands/:id/history	Affiche l’histoire complète d’une marque.	id (obligatoire).
-GET	/brands/:id/records	Liste les records détenus par une marque (ventes, compétitions…).	id (obligatoire).
-GET	/brands/:id/popular-car	Liste les modèles les plus populaires d’une marque.	id (obligatoire).
+# Routes for Brands
 
-Routes principales pour la gestion des marques :
-GET /api/brands : Liste toutes les marques.
-POST /api/brands : Créer une nouvelle marque.
-GET /api/brands/:id : Détails d’une marque spécifique par son ID.
-PUT /api/brands/:id : Met à jour les informations d’une marque.
-DELETE /api/brands/:id : Supprime une marque spécifique.
+## Routes Chart
 
-1. Recherche et filtres
-   GET /api/brands/by-country/:country : Liste des marques par pays d’origine.
-   GET /api/brands/search?query=:query : Recherche de marques par mot-clé.
-   GET /api/brands/top-brands?limit=:limit : Liste des marques ayant le plus de modèles dans la base.
-2. Statistiques
-   GET /api/brands/stats/count : Nombre total de marques.
-   GET /api/brands/stats/models-count/:brandId : Nombre de modèles associés à une marque spécifique.
-   GET /api/brands/stats/average-price/:brandId : Prix moyen des voitures d’une marque.
+| Method   | Route                                      | Description                                         | Params                                                            |
+|----------|--------------------------------------------|-----------------------------------------------------|-------------------------------------------------------------------|
+| `GET`    | `/api/brands/`                             | Lists all car brands.                               | `region` (optional)                                               |
+| `GET`    | `/api/brands/:id`                          | Get details concerning one car brand                | `id` (mandatory)                                                  |
+| `POST`   | `/api/brands/:id`                          | Add a new car brand.                                | `name` (mandatory), `logo_url` (mandatory), `history` (mandatory) |
+| `PUT`    | `/api/brands/:id`                          | Modify an existing brand.                           | `history` (optional), `logo_url` (optional), `records` (optional) |
+| `DELETE` | `/api/brands/:id`                          | Delete a car brand.                                 | `id` (mandatory)                                                  |
+| `GET`    | `/api/brands/:id/history`                  | Get the history of a car brand.                     | `id` (mandatory)                                                  |
+| `GET`    | `/api/brands/:id/records`                  | Lists all records of a car brand.                   | `id` (mandatory)                                                  |
+| `GET`    | `/api/brands/:id/popular-car`              | Lists most popular cars of a brand.                 | `id` (mandatory)                                                  |
+| `GET`    | `/api/brands/by-country/:country`          | Lists car brands regarding a country.               | `country` (mandatory)                                             |
+| `GET`    | `/api/brands/search?query=:query`          | Search a car brand with keyword                     | `query` (mandatory)                                               |
+| `GET`    | `/api/brands/top-brands?limit=:limit`      | Lists car brand with most cars.                     | `limit` (mandatory)                                               |
+| `GET`    | `/api/brands/stats/count`                  | Returns the number of car brands.                   |                                                                   |
+| `DELETE` | `/api/brands/stats/models-count/:brandId`  | Returns the number of cars from the car brand.      | `brandId` (mandatory)                                             |
+| `DELETE` | `/api/brands/stats/average-price/:brandId` | Returns the average price of cars from a car brand. | `brandId` (mandatory)                                             |
+| `DELETE` | `/api/brands/top-brands?limit=:limit`      | Lists car brand with most cars.                     | `limit` (mandatory)                                               |
+| `DELETE` | `/api/brands/top-brands?limit=:limit`      | Lists car brand with most cars.                     | `limit` (mandatory)                                               |
 
-1. GET /api/brands
-   Fonction : Liste toutes les marques disponibles.
-   Description : Récupère une liste de toutes les marques de voitures.
-   Paramètres obligatoires : Aucun.
-   Paramètres optionnels :
-   limit: Nombre maximum de marques à retourner.
-   page: Numéro de page pour la pagination.
-   Authentification : Non.
-   Exemple de réponse :
-   json
-   Copier le code
-   {
-   "brands": [
-   {
-   "id": "1",
-   "name": "Toyota",
-   "country": "Japan",
-   "founding_year": 1937
-   },
-   {
-   "id": "2",
-   "name": "Tesla",
-   "country": "USA",
-   "founding_year": 2003
-   }
-   ]
-   }
-   Statuts HTTP :
-   200 OK : Les données sont retournées avec succès.
-   400 Bad Request : Requête malformée ou paramètres incorrects.
-   500 Internal Server Error : Erreur serveur, vérifier les logs serveur.
+## Details of each routes
+
+1. `GET /api/brands/`
+
+    * Mandatory params:
+        * None.
+    * Optional params:
+        * limit:
+            * Maximal number of car brands to return.
+        * page:
+            * Page number for pagination
+        * Authentication:
+            * Optional
+        * Response example:
+            * ```JSON
+                {
+                  "brands":  [
+                    {
+                      "id": "1",
+                      "name": "Toyota",
+                      "country": "Japan",
+                      "founding_year": 1937
+                    },
+                    {
+                    "id": "2",
+                    "name": "Tesla",
+                    "country": "USA",
+                    "founding_year": 2003
+                    }
+                  ]
+                }
+                ```
+        * HTTP Status:
+          * `200 OK`: Data are returned successfully
+          * `400 Bad Request`: The request is non-conventional or params are not correct
+          * `500 Internal Server Error`: Server error, please try again
+
+
 2. POST /api/brands
    Fonction : Ajouter une nouvelle marque.
    Description : Crée une nouvelle marque de voiture.

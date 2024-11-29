@@ -1,8 +1,11 @@
-1. Articles et Actualités
-   POST /api/articles : Ajouter un article sur une voiture, une marque, ou un événement.
-   Params : { title, content, images, tags }
-   GET /api/articles : Liste des articles disponibles.
-   GET /api/articles/:id : Détails d’un article.
-   PUT /api/articles/:id : Modifier un article.
-   Params : { title, content, images, tags }
-   DELETE /api/articles/:id : Supprimer un article.
+# Routes for Articles
+
+## Routes Chart
+
+| Method   | Route               | Description                                          | Params                    |
+|----------|---------------------|------------------------------------------------------|---------------------------|
+| `POST`   | `/api/articles`     | Add an article regarding a car, a brand or an event. | `title`, `images`, `tags` |
+| `GET`    | `/api/articles`     | Lists available articles.                            |                           |
+| `GET`    | `/api/articles/:id` | Get details concerning one article.                  |                           |
+| `PUT`    | `/api/articles/:id` | Modify an existing article.                          | `title`, `images`, `tags` |
+| `DELETE` | `/api/articles/:id` | Delete an article.                                   |                           |
